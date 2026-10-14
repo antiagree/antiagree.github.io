@@ -19,7 +19,7 @@
   <aside class="sidebar">
     <a class="brand" href="#overview">
       <img src="icon.png" alt="" width="32" height="32">
-      <span>antiagree <small>docs · v0.1.0</small></span>
+      <span>antiagree <small>docs · v0.1.1</small></span>
     </a>
     <nav aria-label="Documentation">
       <div class="nav-group">
@@ -237,16 +237,16 @@
             <tr><td><code>session-review</code></td><td>A session that agreed its way into a plan with unverified numbers.</td></tr>
           </tbody>
         </table></div>
-        <p>Three runs per case, Opus 5.5 as the judge. Sonnet 5.5 and Opus 5.5 ran on 2026-10-08, Haiku 5.5 on 2026-10-14:</p>
+        <p>Results for 0.1.1 on 2026-10-14, three runs per case, Opus 5.5 as the judge:</p>
         <div class="table-wrap"><table>
           <thead><tr><th>Model</th><th class="n">With antiagree</th><th class="n">Without</th></tr></thead>
           <tbody>
-            <tr><td>Sonnet 5.5</td><td class="n win">15/15</td><td class="n">0/12</td></tr>
+            <tr><td>Sonnet 5.5</td><td class="n win">15/15</td><td class="n">1/12</td></tr>
             <tr><td>Opus 5.5</td><td class="n win">15/15</td><td class="n">3/12</td></tr>
-            <tr><td>Haiku 5.5</td><td class="n">4/15</td><td class="n">3/12</td></tr>
+            <tr><td>Haiku 5.5</td><td class="n win">15/15</td><td class="n">3/12</td></tr>
           </tbody>
         </table></div>
-        <p>Without the plugin, Sonnet and Opus still find the planted flaws, but they invent problems in the sound plan and give no decision rule for the benchmark. Sonnet also misses the ledger's kill criterion.</p>
+        <p>Without the plugin, all three models still find the planted flaws, but they invent problems in the sound plan and give no decision rule for the benchmark. Sonnet also misses the ledger's kill criterion in two of three runs.</p>
       </section>
 
       <section id="privacy" aria-labelledby="privacy-h">
@@ -266,7 +266,6 @@
       <section id="limitations" aria-labelledby="limits-h">
         <h2 id="limits-h"><span class="num">12</span>Limitations</h2>
         <ul>
-          <li><strong>Small models.</strong> On Haiku 5.5 it still over-criticizes sound plans, finds the flaw in a benchmark but gives no decision rule for acting on it, and doesn't start when asked to review the session.</li>
           <li><strong>Our own cases.</strong> We wrote the eval cases, so treat the numbers as signals, not proof.</li>
           <li><strong>Reasoning-only reviews.</strong> Without code or data to read, its conclusions top out at HYPOTHESIS, and it says so.</li>
           <li><strong>Prior art needs search.</strong> If web search isn't available or allowed, prior art stays unchecked and any claim of novelty is a HYPOTHESIS.</li>
@@ -277,7 +276,7 @@
         <h2 id="faq-h"><span class="num">13</span>FAQ</h2>
         <details>
           <summary>Will it just say no to everything?</summary>
-          <p>No. It names what your plan gets right before attacking it, credits the safeguards you already built in, and treats GO as the default when the facts support the plan. In the sound-plan eval case, on Sonnet 5.5 and Opus 5.5, it says GO even when the prompt asks it to be brutal.</p>
+          <p>No. It names what your plan gets right before attacking it, credits the safeguards you already built in, and treats GO as the default when the facts support the plan. In the sound-plan eval case, on Sonnet 5.5, Opus 5.5 and Haiku 5.5, it says GO even when the prompt asks it to be brutal.</p>
         </details>
         <details>
           <summary>Does it cost tokens when I'm not using it?</summary>
