@@ -19,7 +19,7 @@
   <aside class="sidebar">
     <a class="brand" href="#overview">
       <img src="icon.png" alt="" width="32" height="32">
-      <span>antiagree <small>docs · v0.1.1</small></span>
+      <span>antiagree <small>docs · v0.2.2</small></span>
     </a>
     <nav aria-label="Documentation">
       <div class="nav-group">
@@ -153,8 +153,8 @@
         <div class="verdicts">
           <div class="verdict go">GO<p>Sound; proceed. The default when the diagnosis is supported, the fix is standard, and it can be verified and rolled back cheaply.</p></div>
           <div class="verdict iterate">ITERATE<p>Right goal and approach, with a must-fix the plan doesn't already cover.</p></div>
-          <div class="verdict rethink">RETHINK<p>Right goal, wrong approach.</p></div>
-          <div class="verdict kill">KILL<p>Drop it.</p></div>
+          <div class="verdict rethink">RETHINK<p>Right goal, wrong approach: a must-fix this approach can't satisfy, or a much simpler path reaches the same goal.</p></div>
+          <div class="verdict kill">KILL<p>Drop it: the goal isn't worth what it costs, or a kill criterion you set has been met. A met kill criterion makes it KILL, whatever else holds up.</p></div>
         </div>
         <div class="card-out">
           <div class="ask">I'm about to announce a -77% latency cut from our new cache. Tear it apart before I ship.</div>
@@ -193,12 +193,13 @@
 
       <section id="ledger" aria-labelledby="ledger-h">
         <h2 id="ledger-h"><span class="num">07</span>Kill criteria</h2>
-        <p>When a review produces experiments with thresholds, antiagree offers to record them in <code>ANTIAGREE.md</code> at the project root. It writes only if you agree, appends, and never edits past entries except their status line.</p>
-<pre><code>## 2026-10-05 - What was decided
+        <p>When a review produces experiments with thresholds, antiagree offers to record them in <code>ANTIAGREE.md</code> at the repository root. It writes only if you agree, appends, and never edits past entries except their status line.</p>
+<pre><code>## YYYY-MM-DD - What was decided
 - Hypothesis: ...
 - Test: ... (by YYYY-MM-DD)
 - GO if ... / KILL if ...
 - Status: open</code></pre>
+        <p>A status is one of: <code>open</code>; <code>passed</code> (the test ran and met the GO bar); <code>met</code> (a kill criterion was met); <code>killed</code> (you dropped the idea); <code>expired</code> (the deadline passed without the test). When a review finds an open entry whose result is in or whose deadline has passed, it proposes the new status with the reason, and changes that line only if you agree.</p>
         <p>The next review reads the file first. You set the bar before you were attached to the outcome, so the review doesn't let you move it after the result is in without new facts about the threshold itself.</p>
       </section>
 
@@ -207,6 +208,7 @@
         <h3>Claude plugin directory</h3>
         <p>In the Claude desktop app: Customize → Plugins → Discover → antiagree. In Claude Code:</p>
 <pre><code>claude plugin install antiagree@anthropic-plugin-directory</code></pre>
+        <p>The directory can serve an earlier version while a newer one is in review. The repository always has the newest.</p>
         <h3>Claude Code, from the repository</h3>
 <pre><code>/plugin marketplace add antiagree/antiagree
 /plugin install antiagree@antiagree</code></pre>
@@ -221,10 +223,10 @@
           <tbody>
             <tr><td><code>/antiagree</code></td><td>Reviews this session's decisions.</td></tr>
             <tr><td><code>/antiagree our plan to split the monolith</code></td><td>Reviews anything: an idea in prose, a file, a directory, a PR, a URL.</td></tr>
-            <tr><td><code>/antiagree quick bench/RESULTS.md</code></td><td>Verdict card plus the top three findings.</td></tr>
+            <tr><td><code>/antiagree quick bench/RESULTS.md</code></td><td>Verdict card plus the top three findings, or the top three notes for a GO.</td></tr>
           </tbody>
         </table></div>
-        <p>Or just ask: "attack my plan", "be brutally honest", "don't just agree with me", "no me des la razón". Once invoked, it keeps the stance for the rest of the session until you tell it to stop.</p>
+        <p>Or just ask: "attack my plan", "be brutally honest", "don't just agree with me", "no me des la razón". Once invoked, it keeps the stance for the rest of the session, until you say "antiagree off" or "stop".</p>
       </section>
 
       <section id="checked" aria-labelledby="checked-h">
@@ -279,7 +281,7 @@
         <h2 id="faq-h"><span class="num">13</span>FAQ</h2>
         <details>
           <summary>Will it just say no to everything?</summary>
-          <p>No. It names what your plan gets right before attacking it, credits the safeguards you already built in, and treats GO as the default when the facts support the plan. In the sound-plan eval case, on Sonnet 5.5, Opus 5.5 and Haiku 5.5, it says GO even when the prompt asks it to be brutal.</p>
+          <p>No. It names what your plan gets right before attacking it, credits the safeguards you already built in, and treats GO as the default when the facts support the plan. In the sound-plan eval case for 0.1.1, on Sonnet 5.5, Opus 5.5 and Haiku 5.5, it says GO even when the prompt asks it to be brutal.</p>
         </details>
         <details>
           <summary>Does it cost tokens when I'm not using it?</summary>
